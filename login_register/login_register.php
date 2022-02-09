@@ -1,10 +1,10 @@
 <?php 
-require"connection.php";
+require("connection.php");
 
 #Login Part : 
 if(isset($_POST['login']))
 {
-    $query = "SELECT * FROM `registered_user` WHERE `email` = $_POST[email_username] OR `username` = '$_POST[email_username]'";
+    $query = "SELECT * FROM `registered_user` WHERE `email` = '$_POST[user_name]' OR `username` = '$_POST[user_name]'";
     $result = mysqli_query($conn,$query);
 
     if($result)
@@ -15,7 +15,7 @@ if(isset($_POST['login']))
             if(password_verify($_POST['password'],$result_fetch['password']))
             {
                 # if password match : 
-                    echo"Correct Data";
+                    echo"Correct";
 
             }
             else
