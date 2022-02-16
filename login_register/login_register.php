@@ -1,5 +1,6 @@
 <?php 
 require("connection.php");
+session_start();
 
 #Login Part : 
 if(isset($_POST['login']))
@@ -14,8 +15,11 @@ if(isset($_POST['login']))
             $result_fetch = mysqli_fetch_assoc($result);
             if(password_verify($_POST['password'],$result_fetch['password']))
             {
-                # if password match : 
-                    echo"Correct";
+
+               $_SESSION['logged_in']=true;
+               $_SESSION['username']=$result_fetch['username'];
+               header('location:index.php');
+
 
             }
             else
@@ -64,9 +68,9 @@ if(isset($_POST['register'])){
             if($result_fetch['username']==$_POST['username']){
                 #error for username already  registered 
                 echo"<script>
-            alert('$result_fetch[username] - Username Already Taken');
-            window.location.href='index.php';
-            </script>";
+                alert('$result_fetch[username] - Username Already Taken');
+                window.location.href='index.php';
+                </script>";
             }
 
             else{
@@ -98,7 +102,7 @@ if(isset($_POST['register'])){
                 <script>
                 alert('cannot Run Query');
                 window.location.href='index.php';
-                </script>";
+                </script>"; 
             }
             
         }

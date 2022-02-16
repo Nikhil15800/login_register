@@ -1,4 +1,7 @@
-<?php require"connection.php"?>
+<?php 
+require"connection.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +21,25 @@
             <a href="#">CONTACT</a>
             <a href="#">ABOUT</a>
         </nav>
-        <div class="sign-in-up">
-            <button type="button" onclick="popup('login-popup')">Login</button>
-            <button type="button" onclick="popup('register-popup')">Register</button>
-        </div>
-    </header>
+
+        <?php 
+        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true)
+        {
+            echo"
+            <div class='user'>
+            $_SESSION[username] - <a href='logout.php'>LOGOUT</a>
+            </div>
+            ";
+        }
+        else{
+            echo"<div class='sign-in-up'>
+            <button type='button' onclick=\"popup('login-popup')\">Login</button>
+            <button type='button' onclick=\"popup('register-popup')\">Register</button>
+            </div>";
+        }
+        ?>
+       </header>
+       
     <!--User Login  -->
     <div class="popup-container" id="login-popup">
         <div class="popup">
@@ -58,6 +75,12 @@
         </div>
     </div>
 
+<?php
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true)
+{
+    echo "<h1 style='text-align:center; margin-top: 200px;'> WELCOME TO THIS WEBSITE - $_SESSION[username]</h1>";
+}
+?>
     <script>
         function popup(popup_name){
             get_popup=document.getElementById(popup_name);
