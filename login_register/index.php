@@ -39,6 +39,7 @@ session_start();
         }
         ?>
        </header>
+
        
     <!--User Login  -->
     <div class="popup-container" id="login-popup">
@@ -69,7 +70,7 @@ session_start();
                 <input type="text" placeholder="UserName" name="username">
                 <input type="email" placeholder="E-mail" name="email">
 
-                <input type="text" placeholder="Password" name="password">
+                <input type="password" placeholder="Password" name="password" >
                 <button type="submit" class="register-btn"name="register">Register</button>
             </form>
         </div>
